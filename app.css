@@ -1,0 +1,15 @@
+#container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#container > div {
+    text-align: center;
+    border: 1px solid;
+    max-width: 33%;
+    width: 33%;
+}
+
+img {
+    max-width: 100%;
+}
