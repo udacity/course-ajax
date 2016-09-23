@@ -1,0 +1,20 @@
+html {
+    box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    background: #ececec;
+}
+
+#container {
+    background: white;
+    margin: auto;
+    max-width: 1200px;
+    padding: 1em;
+    width: 80%;
+}
