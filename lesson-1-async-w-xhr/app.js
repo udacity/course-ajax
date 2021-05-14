@@ -7,10 +7,11 @@
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         responseContainer.innerHTML = '';
-        //searchedForText = searchField.value;
+        searchedForText = searchField.value;
 
         
-        const searchedForText = 'hippos';
+        //const searchedForText = searchField.value;
+        //console.log(searchedForText);
         const unsplashRequest = new XMLHttpRequest();
         unsplashRequest.open('GET', `https://api.unsplash.com/search/photos?page=1&query=${searchedForText}`);
         unsplashRequest.onload= addImage;
@@ -19,6 +20,21 @@
 
         function addImage(){
            // debugger;
+           let htmlContenet ='';
+           //convert rsposnse to java script
+           const data = JSON.parse(this.responseText);
+
+           if (data && data.results && data.results[0]){
+               const firstImage = data.results[0];
+               htmlContenet = `<figure>
+               <img src="${firstImage.urls.regular}" alt="${searchedForText}">
+               <figcaption>${searchedForText} by ${firstImage.user.name}</figcaption>
+               </figure>`;
+           }else{
+               htmlContenet = `<div class="error-no-image"> No images available</div>`;
+           }
+           //update page with returned imag from API Uspalsh
+           responseContainer.insertAdjacentHTML('afterbegin', htmlContenet);
         }
 
         function addArticles () {}
