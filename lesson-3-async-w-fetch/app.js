@@ -42,7 +42,7 @@
     fetch (`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=W1fdekfDs1A43nsSvHyyZUK368U2TjKQ`)
     .then(response=> response.json())
     .then(addArticles)
-    .catch(e => requestError(e, 'article'));
+    .catch(e => requestError(e, 'articles'));
 
     function addArticles (articles) {
         console.log(articles);
