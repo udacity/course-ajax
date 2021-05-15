@@ -37,6 +37,38 @@
         console.log(e);
         responseContainer.insertAdjacentHTML('beforeend', `<p class="network-warning">Oh no! There was an error making a request for the ${part}.</p>`);
     }
+
+    // fetch the articles from NewYork times 
+    fetch (`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=W1fdekfDs1A43nsSvHyyZUK368U2TjKQ`)
+    .then(response=> response.json())
+    .then(addArticles)
+    .catch(e => requestError(e, 'article'));
+
+    function addArticles (articles) {
+        console.log(articles);
+        let htmlContenet ='';
+        //convert rsposnse to java script
+        //const data = JSON.parse(this.responseText);
+        // check if there is a response article 
+        if (articles.response && articles.response.docs && articles.response.docs.length > 1){
+         // place result articles in an unordered list 
+            htmlContenet ='<ul>' + articles.response.docs.map(article => `<li class="articles">
+            <h2><a href="${article.web_url}">${article.headline.main}</a></h2>
+            <p>${article.snippet}</p>
+            </li>`).join('' + '</ul');
+        }else {
+            htmlContenet = '<div class="error-no-article">Nor Articles Available</div>';
+        }
+
+        responseContainer.insertAdjacentHTML('beforeend',htmlContenet);
+
+
+
+    }
+
+
+
+
     
     });
 })();
